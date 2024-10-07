@@ -32,7 +32,9 @@ def get_all_quotes() -> [dict]:
         soup = BeautifulSoup(page, "html.parser")
 
         quotes = soup.select(".quote")
-        quotes_list.extend([parse_single_quote(quote_soup) for quote_soup in quotes])
+        quotes_list.extend(
+            [parse_single_quote(quote_soup) for quote_soup in quotes]
+        )
 
         next_button = soup.select_one(".next > a")
         if next_button:
@@ -46,8 +48,12 @@ def get_all_quotes() -> [dict]:
 
 
 def create_report(output_csv_path: str, quote_dict: dict) -> None:
-    with open(output_csv_path, 'a', encoding='utf-8') as file:
-        file.write(f'{quote_dict["text"]},{quote_dict["author"]},{"|".join(quote_dict["tags"])}\n')
+    with open(output_csv_path, "a", encoding="utf-8") as file:
+        file.write(
+            f'{quote_dict["text"]},'
+            f'{quote_dict["author"]},'
+            f'{"|".join(quote_dict["tags"])}\n'
+        )
 
 
 def main(output_csv_path: str) -> None:
@@ -58,4 +64,3 @@ def main(output_csv_path: str) -> None:
 
 if __name__ == "__main__":
     main("quotes.csv")
-
