@@ -46,7 +46,7 @@ def get_all_quotes() -> list[Quote]:
     return quotes_list
 
 
-def create_report(output_csv_path, quotes: list[Quote]) -> None:
+def create_report(output_csv_path: str, quotes: list[Quote]) -> None:
     with open(output_csv_path, "w", encoding="utf8", newline="") as file:
         writer = csv.writer(file)
         writer.writerow([field.name for field in fields(Quote)])
